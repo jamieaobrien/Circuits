@@ -8,10 +8,11 @@ plot(Vin2_100,Vout2_100);
 hold on
 plot(Vin2_1000,Vout2_1000);
 plot(Vin2_10k,Vout2_10k);
-plot(Vin2_100,y1, 'k:');
-legend('100 Ohm Resistor','1k Ohm Resistor','10k Ohm Resistor','Best fit line (m = 1.001)')
+plot(Vin2_100,y1, 'k--');
+legend('100 Ohm Resistor','1k Ohm Resistor','10k Ohm Resistor','Best fit line (m = 1.001)','Location','northwest')
 xlabel('Input Voltage (V)')
 ylabel('Output Voltage (V)')
+title('Applied Input Voltage Vs. Voltage Across Transistor')
 
 
 
@@ -80,6 +81,42 @@ xlabel('Input Voltage (V)')
 ylabel('Input Current (A)')
 title('10k Ohm Resistor')
 legend('10k Ohm Resistor','Best fit line (x-intercept = .6558V)')
+
+%% Making Ion as func of R
+clf
+Ut = 1/p2(1);
+Rs = [100, 1000, 10000];
+Ions_theoretical = Ut.*(1./Rs)
+
+
+
+Ions = [Iin2_100(35), Iin2_1000(40), Iin2_10k(46)]
+loglog(Rs, Ions, 'bo');
+hold on
+loglog(Rs, Ions_theoretical);
+xlabel('Resistance (log(Ohms))')
+ylabel('Current (log(A))')
+title('Ion as function of R')
+legend('Measured values for Ion','Theoretical: Ion = Ut/R, Ut = .0258V')
+
+
+%% Making Von as func of R
+clf
+Is = exp(p2(2));
+
+Vons = [.6558, .6029, .5482];
+Vons_theoretical = Ut.*log(Ions_theoretical./Is);
+semilogx(Rs, Vons, 'bo');
+hold on
+semilogx(Rs, Vons_theoretical);
+xlabel('Resistance (log(Ohms))')
+ylabel('Voltage (V)')
+title('Von as function of R')
+legend('Measured values for Von','Theoretical: Von = Ut*log(Ion/Is), Ut = .0258V, Is = 4.167e-15A')
+
+
+
+
 
 
 
