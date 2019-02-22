@@ -65,7 +65,7 @@ plot(Vin2_1000(1:45),yR1000)
 xlabel('Input Voltage (V)')
 ylabel('Input Current (A)')
 title('1000 Ohm Resistor')
-legend('1000 Ohm Resistor','Best fit line (x-intercept = .6558V)')
+legend('1000 Ohm Resistor','Best fit line (x-intercept = .6029V)')
 
 
 %%
@@ -80,7 +80,7 @@ plot(Vin2_10k(1:50),yR10k)
 xlabel('Input Voltage (V)')
 ylabel('Input Current (A)')
 title('10k Ohm Resistor')
-legend('10k Ohm Resistor','Best fit line (x-intercept = .6558V)')
+legend('10k Ohm Resistor','Best fit line (x-intercept = .5482V)')
 
 %% Making Ion as func of R
 clf
