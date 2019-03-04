@@ -138,7 +138,7 @@ loglog(Ib10k(1:end-1), rb10k(1:end), 'o','markersize', 4)
 hold on
 
 rb10k_theoretical = (Ut./Ib10k) + 10000*Beta
-loglog(Ib10k(1:end), rb10k_theoretical(1:end))
+loglog(Ib10k(20:end), rb10k_theoretical(20:end))
 
 lgd = legend('Experimental','Theoretical');
 title(lgd,'10k Ohm Resistor')
