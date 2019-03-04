@@ -104,7 +104,7 @@ y2 = polyval(p2,Vin1003);
 
 plot(Vin1003,Vout1003,'b')
 hold on 
-plot(Vin1003,y2,'b--')
+plot(Vin1003,y2,'r--')
 xlabel('Input Voltage (V)')
 ylabel('Output Voltage (V)')
 legend('Voltage Transfer Characteristic (VTC)','VTC fit')
@@ -118,7 +118,7 @@ p3 = polyfit(Vin200(20:40),Vout200(20:40),1);
 y3 = polyval(p3,Vin200(10:60));
 p4 = polyfit(Vin300(20:40),Vout300(20:40),1);
 y4 = polyval(p4,Vin300(10:50));
-p5 = polyfit(Vin400(17:25),Vout400(17:25),1);
+p5 = polyfit(Vin400(30:40),Vout400(0:40),1);
 y5 = polyval(p5,Vin400(10:40));
 clf
 plot(Vin1003,Vout1003,'b-')
@@ -132,5 +132,5 @@ plot(Vin400,Vout400,'m-')
 plot(Vin400(10:40),y5,'m--')
 xlabel('Input Voltage (V)')
 ylabel('Output Voltage (V)')
-legend('Follower, R=100','R=100 fit','Inverter, R=200','R=200 fit','Inverter, R=300','R=300 fit','Inverter, R=400','R=400 fit')
+legend('Follower, R=100','R=100 fit','Inverter, R=200','Inverter, R=300','Inverter, R=400')
 
