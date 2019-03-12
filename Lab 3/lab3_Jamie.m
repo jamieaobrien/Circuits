@@ -102,18 +102,24 @@ clf
 p2 = polyfit(Vin1003(20:30),Vout1003(20:30),1);
 y2 = polyval(p2,Vin1003);
 
+x = ones(51);
+x = x.*(-p2(2));
+
+vony = linspace(-1,4,51);
+
 plot(Vin1003,Vout1003,'b')
 hold on 
 plot(Vin1003,y2,'b--')
+plot(x,vony,'k')
 xlabel('Input Voltage (V)')
 ylabel('Output Voltage (V)')
-legend('Voltage Transfer Characteristic (VTC)','VTC fit')
+legend('Voltage Transfer Characteristic (VTC)','VTC fit','Vin=Von')
 
 
 %% Experiment 4
 % clear all
 load('Lab3DataExp4.mat');
-
+vony1 = linspace(-1,6,51);
 p3 = polyfit(Vin200(20:40),Vout200(20:40),1);
 y3 = polyval(p3,Vin200(10:60));
 p4 = polyfit(Vin300(20:40),Vout300(20:40),1);
@@ -130,7 +136,8 @@ plot(Vin300,Vout300,'r-')
 plot(Vin300(10:50),y4,'r--')
 plot(Vin400,Vout400,'m-')
 plot(Vin400(10:40),y5,'m--')
+plot(x,vony1,'k')
 xlabel('Input Voltage (V)')
 ylabel('Output Voltage (V)')
-legend('Follower, R=100','R=100 fit','Inverter, R=200','R=200 fit','Inverter, R=300','R=300 fit','Inverter, R=400','R=400 fit')
+legend('Follower, R=100','R=100 fit','Inverter, R=200','R=200 fit','Inverter, R=300','R=300 fit','Inverter, R=400','R=400 fit', 'Vin=Von')
 
