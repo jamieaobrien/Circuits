@@ -65,11 +65,11 @@ perc_b = diff_b ./ Ic_avg;
 perc_c = diff_c ./ Ic_avg;
 perc_d = diff_d ./ Ic_avg;
 
-plot(Vb1a, perc_a)
+plot(Vb1a, perc_a,'Marker','.','MarkerSize',12)
 hold on
-plot(Vb1b, perc_b)
-plot(Vb1c, perc_c)
-plot(Vb1d, perc_d)
+plot(Vb1b, perc_b,'Marker','.','MarkerSize',12)
+plot(Vb1c, perc_c,'Marker','.','MarkerSize',12)
+plot(Vb1d, perc_d,'Marker','.','MarkerSize',12)
 
 ylabel('Percentage Difference from Average Collector Current')
 xlabel('Base Voltage (V)')
