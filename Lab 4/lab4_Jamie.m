@@ -1,9 +1,9 @@
 load('Exp1Data.mat')
 %%
-Ic1a = Ie1a - Ib1a;
-Ic1b = Ie1b - Ib1b;
-Ic1c = Ie1c - Ib1c;
-Ic1d = Ie1d - Ib1d;
+Ic1a = -Ie1a - Ib1a;
+Ic1b = -Ie1b - Ib1b;
+Ic1c = -Ie1c - Ib1c;
+Ic1d = -Ie1d - Ib1d;
 Ic_avg = (Ic1a + Ic1b + Ic1c + Ic1d)./4;
 
 pa = polyfit(Vb1a(1:30), log(Ic1a(1:30)), 1);
