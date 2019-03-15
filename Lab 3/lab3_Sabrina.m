@@ -1,3 +1,4 @@
+
 load('Lab3Data_Exp1and2.mat')
  
 Ic1 = Ie1 - Ib1;
