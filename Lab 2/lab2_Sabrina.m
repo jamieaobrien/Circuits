@@ -4,10 +4,10 @@ p1 = polyfit(Vin2_100(70:90),Vout2_100(70:90),1); %V1 is the x axis, I1 is the y
 y1 = polyval(p1,Vin2_100); % generates y values using the coefficents from polyfit
 
 figure()
-plot(Vin2_100,Vout2_100);
+plot(Vin2_100,Vout2_100,'Marker','.','MarkerSize',8);
 hold on
-plot(Vin2_1000,Vout2_1000);
-plot(Vin2_10k,Vout2_10k);
+plot(Vin2_1000,Vout2_1000,'Marker','.','MarkerSize',8);
+plot(Vin2_10k,Vout2_10k,'Marker','.','MarkerSize',8);
 plot(Vin2_100,y1, 'k--');
 legend('100 Ohm Resistor','1k Ohm Resistor','10k Ohm Resistor','Best fit line (m = 1.001)','Location','northwest')
 xlabel('Input Voltage (V)')
@@ -26,13 +26,13 @@ segment_Iin2_100 = log(Iin2_100(42:62));
 p2 = polyfit(segment_Vin2_100,segment_Iin2_100,1); %V1 is the x axis, I1 is the y axis, 1 gives us linear coefficients (y=mx+b so p1=[m b])
 y1 = polyval(p2,Vin2_100); % generates y values using the coefficents from polyfit
 %plot(segment_Vin2_100,y1,'m-') % plot the line of best fit (x axis is still our V1)
-
+jjj = p2(2) + p2(1).*Vin2_100;
 figure()
-semilogy(Vin2_100,Iin2_100);
+semilogy(Vin2_100,Iin2_100,'Marker','.','MarkerSize',8);
 hold on
-semilogy(Vin2_1000,Iin2_1000);
-semilogy(Vin2_10k,Iin2_10k);
-semilogy(Vin2_100,y1,'m-')
+semilogy(Vin2_1000,Iin2_1000,'Marker','.','MarkerSize',8);
+semilogy(Vin2_10k,Iin2_10k,'Marker','.','MarkerSize',8);
+semilogy(Vin2_100(6:end),exp(y1),'m-')
 legend('100','1000','10000')
 xlabel('Input Voltage (V)')
 ylabel('Input Current (log(A))')

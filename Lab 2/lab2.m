@@ -3,10 +3,24 @@ load('Lab2Data.mat')
  spacingCurrent = logspace(-2, -9);
  spacingVoltage = linspace(0.7460, .3191);
 %% Voltage-Current Characteristic
-plot(Vin1b,Iin1b)
-xlabel('Current (A)')
-ylabel('Voltage (V)')
+
 t1 = exp(log(Is) + (Vin1b./uT));
+pa = polyfit(Vin1b,log(Iin1b),1);
+ya = polyval(pa,Vin1b);
+Is1 = exp(pa(1));
+uT1 = 1./pa(2);
+f = Is*exp(Vin1b./uT);
+f1 = Is1.*exp(Vin1b./uT);
+f2 = log(Is1) + -(1/uT).*Vin1b;
+semilogy(Vin1b,Iin1b,'Marker','.','MarkerSize',10)
+hold on
+semilogy(Vin1b,exp(ya))
+semilogy(Vin1b,f)
+%semilogy(Vin1b,exp(f2),'--')
+ylabel('Current (A)')
+xlabel('Voltage (V)')
+legend( 'Current-Voltage Characteristic', 'Exponential fit - R = 0.9998 ','Is = 6.8568e-15 A, uT = -0.0263 V', 'Location', 'NorthEast' );
+
 %%
 fit1(Vin1b, Iin1b,g)
 
@@ -26,7 +40,7 @@ g = ((1/m).*Vin1a) + b;
 % plot(Vin1a,g,'*')
 legend('Experimental','Is = 3.0681e-16, uT = -0.0307')
 xlabel('Voltage (V)')
-ylabel('Log of Current')
+ylabel('Current (A)')
 
 
 %% Semi-log of Voltage-current, current-voltage, and theoretical
@@ -38,12 +52,12 @@ Is = exp(b)
 f = Is*exp(-Vin1a./uT);
 g = (m.*Vin1a) + b;
 
-semilogy(Vin1a,Iin1a)
+semilogy(Vin1a,Iin1a,'Marker','.','MarkerSize',10)
 hold on
-semilogy(Vin1b,Iin1b)
+semilogy(Vin1b,Iin1b,'Marker','.','MarkerSize',10)
 semilogy(Vin1a,exp(g))
-xlabel('Current (A)')
-ylabel('Voltage (V)')
+ylabel('Current (A)')
+xlabel('Voltage (V)')
 legend('Current-Voltage Characteristic','Voltage-Current Characteristic','Is = 6.8568e-15 A, uT = 0.0623 V')
 
 %% loglog
@@ -58,10 +72,10 @@ ylabel('Incremental Diode Resistance (Ohms)')
  %% Exp. 2
 
 figure()
-plot(Vin2_100,Vout2_100);
+plot(Vin2_100,Vout2_100,'Marker','.','MarkerSize',10);
 hold on
-plot(Vin2_1000,Vout2_1000);
-plot(Vin2_10k,Vout2_10k);
+plot(Vin2_1000,Vout2_1000,'Marker','.','MarkerSize',10);
+plot(Vin2_10k,Vout2_10k,'Marker','.','MarkerSize',10);
 legend('100','1000','10000')
 
 

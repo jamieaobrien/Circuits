@@ -15,7 +15,7 @@ function [fitresult, gof] = fit1(Vin1b, Iin1b,g)
 
 
 %% Fit: 'fit1'.
-[xData, yData] = prepareCurveData( Vin1b, Iin1b );
+[xData, yData] = prepareCurveData( Vin1b, log(Iin1b) );
 
 % Set up fittype and options.
 ft = fittype( 'exp2' );
@@ -29,7 +29,7 @@ opts.StartPoint = [1.58222999690913e-06 5.27225566417519 0 5.27225566417519];
 
 % Plot fit with data.
 figure( 'Name', 'fit1' );
-plot( fitresult );
+plot( fitresult, 'o' );
 hold on
 plot(Vin1b,Iin1b)
 plot(Vin1b, exp(g));
