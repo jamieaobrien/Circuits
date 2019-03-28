@@ -3,6 +3,16 @@ load('Exp3Data') % .mat file
 %%
 clf
 
+<<<<<<< HEAD
+loglog(Ix250 ,Iz250 ,'Marker','.','MarkerSize',12) % Ix1, Iz1, Marker stuff - I found this looks pretty good
+hold on
+loglog(Ix25k ,Iz25k ,'Marker','.','MarkerSize',12) % Ix2, Iz2, Marker stuff - I found this looks pretty good
+loglog(Ix2k ,Iz2k ,'Marker','.','MarkerSize',12) % Ix3, Iz3, Marker stuff - I found this looks pretty good
+xlabel('Log of Ix (A)')
+ylabel('Log of Iz (A)')
+
+legend('250','25k','2k') % name them, probably something to do with each value of Iy
+=======
 loglog(Ix1,-Iz1 ,'b','Marker','.','MarkerSize',12) % Ix1, Iz1, Marker stuff - I found this looks pretty good
 hold on
 loglog(Ix2,-Iz2,'r','Marker','.','MarkerSize',12) % Ix2, Iz2, Marker stuff - I found this looks pretty good
@@ -43,10 +53,17 @@ loglog(Ix1,Iz3theo2,'g')
 
 
 legend('I_x = 12mA','I_x = 1.2mA','I_x = 120\muA', 'I_z = sqrt(12mA*I_y)', 'I_z = sqrt(1.2mA*I_y)', 'I_z = sqrt(120\muA*I_y)') % name them, probably something to do with each value of Ix
+>>>>>>> 58878a34fba3df96136ba5e855441d2659d3c841
 
 %%
 clf
 
+<<<<<<< HEAD
+loglog(Ix250Si ,Iz250Si ,'Marker','.','MarkerSize',12) % Iy1, Iz1, Marker stuff - I found this looks pretty good
+hold on
+loglog(Ix25kSi ,Iz25kSi ,'Marker','.','MarkerSize',12) % Iy2, Iz2, Marker stuff - I found this looks pretty good
+loglog(Ix2kSi , Iz2kSi,'Marker','.','MarkerSize',12) % Iy3, Iz3, Marker stuff - I found this looks pretty good
+=======
 loglog(Ix250,-Iz250, 'b','Marker','.','MarkerSize',12) % Ix1, Iz1, Marker stuff - I found this looks pretty good
 hold on
 loglog(Ix250,-Iz2k,'r','Marker','.','MarkerSize',12) % Ix2, Iz2, Marker stuff - I found this looks pretty good
@@ -72,6 +89,7 @@ loglog(Ix250Si,-Iz250Si, 'b','Marker','.','MarkerSize',12) % Ix1, Iz1, Marker st
 hold on
 loglog(Ix250Si,-Iz2kSi,'r','Marker','.','MarkerSize',12) % Ix2, Iz2, Marker stuff - I found this looks pretty good
 loglog(Ix250Si,-Iz25kSi, 'g','Marker','.','MarkerSize',12) % Ix3, Iz3, Marker stuff - I found this looks pretty good
+>>>>>>> 58878a34fba3df96136ba5e855441d2659d3c841
 xlabel('Log of Iy (A)')
 ylabel('Log of Iz (A)')
 
