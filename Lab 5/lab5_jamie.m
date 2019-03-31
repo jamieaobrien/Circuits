@@ -98,7 +98,7 @@ semilogy(Vdn5V,Icn5V,'.','MarkerSize',8)
 
 xlabel('Drain Voltage (V)')
 ylabel('Channel Current (A)')
-legend('Vd = 500mV','Vd = 600mV','Vd = 700mV','Vd = 5V')
+legend('Vg = 500mV','Vg = 600mV','Vg = 700mV','Vg = 5V')
 
 
 %%
@@ -117,7 +117,7 @@ semilogy(Vdp4550mV,Icp4550mV,'Marker','.','MarkerSize',8)
 hold off
 xlabel('Drain Voltage (V)')
 ylabel('Channel Current (A)')
-legend('Vd = 0V','Vd = 4400mV','Vd = 4500mV','Vd = 4550V')
+legend('Vg = 0V','Vg = 4400mV','Vg = 4500mV','Vg = 4550V')
 
 %% early voltage
 % not sure what parts of the curves to do a fit on
