@@ -43,17 +43,18 @@ gmp_weak = -(kappap/Ut).*Isatp;
 gmp_strong = -(kappap/Ut).*sqrt(Isp.*Isatp);
 
 % i don't think it looks right - am i finding gm the right way?
-loglog(Isatn(1:end-1),gmn,'Marker','.','MarkerSize',8)
+loglog(Isatn(1:end-1),gmn,'b.','MarkerSize',8)
 hold on 
-loglog(Isatn,gmn_weak)
-loglog(Isatn,gmn_strong)
 
-loglog(Isatp,gmp_weak)
-loglog(Isatp,gmp_strong)
-loglog(Isatp(1:end-1),gmp,'Marker','.','MarkerSize',8)
+loglog(Isatn,gmn_weak,'b--')
+loglog(Isatn,gmn_strong,'b')
+loglog(Isatp(1:end-1),gmp,'r.','MarkerSize',8)
+loglog(Isatp,gmp_weak,'r--')
+loglog(Isatp,gmp_strong,'r')
+
 xlabel('Channel Current (A)')
-ylabel('Incremental transconductance')
-legend('nMOS','pMOS')
+ylabel('Incremental transconductance (S)')
+legend('nMOS','nMOS strong inversion fit','nMOS weak inversion fit','pMOS','pMOS weak inversion fit','pMOS strong inversion fit')
 %% Experiment 2
 %nmos
 pn1 = polyfit(Vsn(80:131),log(-Icn(80:131)),1);
@@ -67,7 +68,7 @@ ylim([10^(-10) 10^(-2)])
 xlabel('Source Voltage (V)')
 ylabel('Channel Current (A)')
 
-legend('experimental','fit')
+legend('Experimental','Weak inversion fit')
 
 %%
 %pmos
@@ -81,7 +82,7 @@ semilogy(Vsp,exp(yp1))
 ylim([10^(-10) 10^(-2)])
 xlabel('Source Voltage (V)')
 ylabel('Channel Current (A)')
-legend('experimental','fit')
+legend('Experimental','Weak inversion fit')
 
 %%
 clf
@@ -96,18 +97,18 @@ gsn_strong = (1/Ut).*sqrt(Isn.*Isatn);
 gsp_weak = (1/Ut).*Isatp;
 gsp_strong = (1/Ut).*sqrt(Isp.*Isatp);
 
-loglog(Isatn(1:end-1),gsn,'.')
+loglog(Isatn(1:end-1),gsn,'b.')
 hold on 
-loglog(Isatn,gsn_weak)
-loglog(Isatn,gsn_strong)
+loglog(Isatn,gsn_weak,'b--')
+loglog(Isatn,gsn_strong,'b')
+loglog(Isatp(1:end-1),gsp,'r.')
+loglog(Isatp,gsp_weak,'r--')
+loglog(Isatp,gsp_strong,'r')
 
-loglog(Isatp,gmp_weak)
-loglog(Isatp,gmp_strong)
-loglog(Isatp(1:end-1),gsp,'.')
 hold off
 xlabel('Channel Current(A)')
-ylabel('Incremental Source Conductance')
-legend('nMOS','pMOS')
+ylabel('Incremental Source Conductance (S)')
+legend('nMOS','nMOS weak inversion fit','nMOS strong inversion fit','pMOS','pMOS weak inversion fit','pMOS strong inversion fit')
 
 
 %% Experiment 3
@@ -140,7 +141,6 @@ semilogy(Vdp4400mV,-Icp4400mV,'Marker','.','MarkerSize',8)
 % figure
 % hold on
 % semilogy(Vdp4500mV,Icp4500mV,'Marker','.','MarkerSize',8)
-hold on
 semilogy(Vdp4550mV,Icp4550mV,'Marker','.','MarkerSize',8)
 %Made this ish negative just so it would fit on graph but ughhh gotta
 %mention in lab how it trash
@@ -149,25 +149,76 @@ semilogy(Vdp4550mV,Icp4550mV,'Marker','.','MarkerSize',8)
 
 xlabel('Drain Voltage (V)')
 ylabel('Channel Current (A)')
-legend('Vg = 0V','Vg = 4400mV','Vg = 4500mV','Vg = 4550V')
+legend('Vg = 0V','Vg = 4400mV','Vg = 4550V')
 
 %% early voltage
 % not sure what parts of the curves to do a fit on
 % if you can tell me where to do the fit then i can finsh this
+%Early voltage is x intercept of linear fit of the top flat part, Isat is
+%the y intercept, for the pMOS the fits need to be made by doing
+%5V-(vector) according to paige, basically treat like nMOS and find x
+%intercept
 
-
-%Early voltage is x intercept of linear fit of the top flat part, to do 
 %semilogx
 
+np1 = polyfit(Vdn500mV,-Icn500mV,1);
+nr1 = roots(np1);
+Isatn1 = np1(end)
+np2 = polyfit(Vdn600mV,-Icn600mV,1);
+nr2 = roots(np2);
+Isatn2 = np2(end);
+np3 = polyfit(Vdn5V,-Icn5V,1);
+nr3 = roots(np3);
+Isatn3 = np3(end);
+
+p1 = polyfit(Vdp0V,Icp0V,1);
+pr1 = roots(p1);
+Isatp1 = p1(end);
+p2 = polyfit(Vdp4400mV,Icp4400mV,1);
+pr2 = roots(p2);
+Isatp2 = p2(end);
+p3 = polyfit(Vdp4550mV,-Icp4550mV,1);
+pr3 = roots(p3);
+Isatp3 = p3(end)
+clf
+semilogx(Isatn1,nr1,'Marker','o')
+hold on 
+semilogx(Isatn2,nr2,'Marker','o','MarkerSize','16')
+semilogx(Isatn3,nr3,'*')
+semilogx(Isatp1,pr1,'*')
+semilogx(Isatp2,pr2,'*')
+semilogx(Isatp3,pr3,'*')
+
+xlabel('Saturation Current (A)')
+ylabel('Early Voltage (V)')
+legend('nMOS Vg = 500mV','nMOS Vg = 600mV','nMOS Vg = 5V','pMOS Vg = 0V','pMOS Vg = 4400mV','pMOS Vg = 4550mV')
 
 %% instrinsic gain
 
+nro1 = 1/nr1(1);
+nro2 = 1/nr2(1);
+nro3 = 1/nr3(1);
+pro1 = 1/p1(1);
+pro2 = 1/p2(1);
+pro3 = 1/p3(1);
 
-%once early voltage is done this should be easy
 
+ngain1 = ((sqrt(Isn*Isatn1))/Ut)*(1-exp(-sqrt(Isatn1/Isn)));
+ngain2 = ((sqrt(Isn*Isatn2))/Ut)*(1-exp(-sqrt(Isatn2/Isn)));
+ngain3 = ((sqrt(Isn*Isatn3))/Ut)*(1-exp(-sqrt(Isatn3/Isn)));
+pgain1 = ((sqrt(Isp*Isatp1))/Ut)*(1-exp(-sqrt(Isatp1/Isp)));
+pgain2 = ((sqrt(Isp*Isatp2))/Ut)*(1-exp(-sqrt(Isatp2/Isp)));
+pgain3 = ((sqrt(Isp*Isatp3))/Ut)*(1-exp(-sqrt(Isatp3/Isp)));
+clf
+loglog(Isatn1,ngain1,'*')
+hold on
+loglog(Isatn2,ngain2,'*')
+loglog(Isatn3,ngain3,'*')
+loglog(Isatp1,pgain1,'*')
+loglog(Isatp2,pgain2,'*')
+loglog(Isatp3,pgain3,'*')
 
-
-
-
-
+xlabel('Saturation Current (A)')
+ylabel('Intrinsic Gain')
+legend('nMOS Vg = 500mV','nMOS Vg = 600mV','nMOS Vg = 5V','pMOS Vg = 0V','pMOS Vg = 4400mV','pMOS Vg = 4550mV')
 
