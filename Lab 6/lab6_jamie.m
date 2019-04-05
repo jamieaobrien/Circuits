@@ -3,7 +3,7 @@ load('lab6data.mat')
 Ut = 0.025;
 epsilon = 5e-4;
 Isata = -Ic1a;
-% [Isa, VTa, kappaa]=ekvfit(Vg1a, Isata, epsilon);
+[Isa, VTa, kappaa]=ekvfit(Vg1a, Isata, epsilon);
 % [Isb, VTb, kappab]=ekvfit(Vg1b, -Ic1b, epsilon);
 % [Isc, VTc, kappac]=ekvfit(Vg1c, -Ic1c, epsilon);
 % [Isd, VTd, kappad]=ekvfit(Vg1c, -Ic1d, epsilon);

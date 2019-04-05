@@ -8,19 +8,19 @@ Isata = -Ic1a;
 % [Isc, VTc, kappac]=ekvfit(Vg1c, -Ic1c, epsilon);
 % [Isd, VTd, kappad]=ekvfit(Vg1c, -Ic1d, epsilon);
 
-ekva = Isa .* ((log(1 + exp((kappaa.*(Vg1a - VTa) - 0)./(2*Ut)))).^2);
+% ekva = Isa .* ((log(1 + exp((kappaa.*(Vg1a - VTa) - 0)./(2*Ut)))).^2);
 % ekva = Isb .* ((log(1 + exp((kappab.*(Vg1b - VTb) - 0)./(2*Ut)))).^2);
 % ekva = Isc .* ((log(1 + exp((kappac.*(Vg1c - VTc) - 0)./(2*Ut)))).^2);
 % ekvd = Isd .* ((log(1 + exp((kappad.*(Vg1d - VTd) - 0)./(2*Ut)))).^2);
 
 figure
-semilogy(Vg1a,-Ic1a,'.')
+semilogy(Vg1a,-Ic1a,'Marker','.','MarkerSize',10)
 hold on
-semilogy(Vg1b,-Ic1b,'.')
-semilogy(Vg1c,-Ic1c,'.')
-semilogy(Vg1c,-Ic1c,'.')
+semilogy(Vg1b,-Ic1b,'Marker','.','MarkerSize',10)
+semilogy(Vg1c,-Ic1c,'Marker','.','MarkerSize',10)
+semilogy(Vg1c,-Ic1c,'Marker','.','MarkerSize',10)
 
-semilogy(Vg1a,ekva)
+% semilogy(Vg1a,ekva)
 % semilogy(Vg1b,Isb)
 % semilogy(Vg1c,Isc)
 % semilogy(Vg1d,Isd)
@@ -35,18 +35,18 @@ diff_a = (Ic_mean - Ic1a)./Ic_mean;
 diff_b = (Ic_mean - Ic1b)./Ic_mean;
 diff_c = (Ic_mean - Ic1c)./Ic_mean;
 diff_d = (Ic_mean - Ic1d)./Ic_mean;
-
+figure
 semilogx(Ic_mean,diff_a,'.')
 hold on
 semilogx(Ic_mean,diff_b,'.')
 semilogx(Ic_mean,diff_c,'.')
 semilogx(Ic_mean,diff_d,'.')
 hold off
-xlabel('Average Channel Current (A)')
+xlabel('Mean Channel Current (A)')
 ylabel('Percent Difference from Mean')
 legend('Q1','Q2','Q3','Q4')
 %% Experiment 2
-clf
+figure
 semilogy(Vg210mV,Ic210mV,'.')
 hold on
 semilogy(Vg210mVp,Ic210mVp,'.')
@@ -72,12 +72,11 @@ hold off
 xlabel('Gate Voltage (V)')
 ylabel('Parallel to Single Ratio')
 legend('Vd = 10mV','Vd = 5V')
-
+%%
 
 % ratio_sc10mV = Ic210mV ./ Ic210mVs;
 ratio_sc5V = Ic25V ./ Ic25Vs;
 
-figure
 % plot(Vg210mV,ratio_sc10mV)
 hold on
 plot(Vg25V,ratio_sc5V,'.')
@@ -94,11 +93,21 @@ figure
 plot(Iina,Iouta,'.')
 hold on
 plot(Iina,ya)
+hold off
 xlabel('Input Current (A)')
 ylabel('Output Current (A)')
-legend('Expe
+legend('Experimental Data','Linear Fit')
 
-
-
+%%
+pb = polyfit(Iinb,Ioutb,1);
+yb = polyval(pb,Iinb);
+figure
+plot(Iinb,Ioutb,'.')
+hold on
+plot(Iinb,yb)
+hold off
+xlabel('Input Current (A)')
+ylabel('Output Current (A)')
+legend('Experimental Data','Linear Fit')
 
 
