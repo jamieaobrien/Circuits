@@ -87,27 +87,36 @@ legend('Vdd = 10mV','Vdd = 5V')
 
 
 %% Experiment 3
-pa = polyfit(Iina,Iouta,1);
-ya = polyval(pa,Iina);
+pa = polyfit(-Iina,Iouta,1);
+ya = polyval(pa,-Iina);
 figure
-plot(Iina,Iouta,'.')
+plot(-Iina,Iouta,'.')
 hold on
-plot(Iina,ya)
+plot(-Iina,ya)
+plot([0,.001],[0,.0005])
+
 hold off
 xlabel('Input Current (A)')
 ylabel('Output Current (A)')
-legend('Experimental Data','Linear Fit')
+legend('Experimental Data','Linear Fit, Divider Ratio = .5029','Theoretical Fit, Divider Ratio = .5')
+
+pa(1)
 
 %%
+x = [0,.001];
+y = .00222 - (.5) * x;
 pb = polyfit(Iinb,Ioutb,1);
 yb = polyval(pb,Iinb);
 figure
 plot(Iinb,Ioutb,'.')
 hold on
 plot(Iinb,yb)
+plot(x,y)
+
 hold off
 xlabel('Input Current (A)')
 ylabel('Output Current (A)')
-legend('Experimental Data','Linear Fit')
+legend('Experimental Data','Linear Fit, Divider Ratio = .4546','Theoretical Fit, Divider Ratio = .5')
 
-
+pb(1)
+pb(2)
