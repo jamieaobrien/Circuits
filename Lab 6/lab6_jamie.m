@@ -1,9 +1,10 @@
 load('lab6data.mat')
 %% Experiment 1
+load('exp1Data.mat')
 Ut = 0.025;
 epsilon = 5e-4;
 Isata = -Ic1a;
-[Isa, VTa, kappaa]=ekvfit(Vg1a, Isata, epsilon);
+% [Isa, VTa, kappaa]=ekvfit(Vg1a, Isata, epsilon);
 % [Isb, VTb, kappab]=ekvfit(Vg1b, -Ic1b, epsilon);
 % [Isc, VTc, kappac]=ekvfit(Vg1c, -Ic1c, epsilon);
 % [Isd, VTd, kappad]=ekvfit(Vg1c, -Ic1d, epsilon);
@@ -46,11 +47,12 @@ xlabel('Mean Channel Current (A)')
 ylabel('Percent Difference from Mean')
 legend('Q1','Q2','Q3','Q4')
 %% Experiment 2
+load('exp2seriesData.mat')
 figure
 semilogy(Vg210mV,Ic210mV,'.')
 hold on
 semilogy(Vg210mVp,Ic210mVp,'.')
-semilogy(Vg210mVs,Ic2dd,'.') % we don't have the data for this one
+semilogy(Vgs,Ics,'.') % we don't have the data for this one
 semilogy(Vg25V,Ic25V,'.')
 semilogy(Vg25Vp,Ic25Vp,'.')
 semilogy(Vg25Vs,Ic25Vs,'.')
@@ -74,10 +76,10 @@ ylabel('Parallel to Single Ratio')
 legend('Vd = 10mV','Vd = 5V')
 %%
 
-% ratio_sc10mV = Ic210mV ./ Ic210mVs;
+ratio_sc10mV = Ic210mV ./ Ics;
 ratio_sc5V = Ic25V ./ Ic25Vs;
-
-% plot(Vg210mV,ratio_sc10mV)
+clf
+plot(Vgs,ratio_sc10mV,'.')
 hold on
 plot(Vg25V,ratio_sc5V,'.')
 hold off
