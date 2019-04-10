@@ -153,6 +153,30 @@ xlabel('Drain Voltage (V)')
 ylabel('Channel Current (A)')
 legend('Vg = 0V','Vg = 4400mV','Vg = 4550mV')
 
+
+%% Voltage
+clf
+
+semilogy(Vdn500mV,Icn500mV,'.','MarkerSize',8)
+hold on
+np1 = polyfit(Vdn500mV(200:end),log(Icn500mV(200:end)),1);
+ny1 = polyval(np1,Vdn500mV(200:end))
+semilogy(Vdn500mV(200:end), ny1)
+
+% semilogy(Vdn500mV,exp(polyval(np1,Vdn500mV,1)))
+% semilogy(Vdn600mV,Icn600mV,'.','MarkerSize',8)
+% semilogy(Vdn700mV,Icn700mV,'.','MarkerSize',8)
+% semilogy(Vdn5V,Icn5V,'.','MarkerSize',8)
+
+ylim([10^(-4) 10^(-1.5)])
+xlabel('Drain Voltage (V)')
+ylabel('Channel Current (A)')
+legend('Vg = 500mV','Vg = 600mV','Vg = 5V')
+
+nr1 = roots(np1);
+
+
+
 %% early voltage
 % not sure what parts of the curves to do a fit on
 % if you can tell me where to do the fit then i can finsh this

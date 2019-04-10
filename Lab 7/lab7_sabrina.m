@@ -1,10 +1,25 @@
-load('lab6data.mat')
+load('lab7data.mat')
 %% Experiment 1
-load('exp1Data.mat')
+% In your report, include a single plot showing I1, I2, I1 ? I2, and I1 + I2, as a function of V1 ? V2 
+% for all three values of V2 that you used. Do these current–voltage characteristics change significantly 
+% as V2 changes? Also include a plot showing the common-source node voltage, V , as a function of V1 ? V2 
+% for all three values of V2. How does the value of V change as V1 goes from below V2 to above it?
+
+% For each of the three values of V2 that you used, fit a straight line to the plot of I1 ?I2 as a 
+% function of V1 ? V2 around the region where V1 ? V2 (i.e., where V1 ? V2 ? 0). The slope of this line is 
+% approximately equal to the (incremental) differential-mode transconductance gain of the differential pair
+% Find eq for Gm in packet
+
+% Now, set the bias voltage, Vb, so that the bias current is above threshold. For a single value of V2 that is 
+% far enough away from the power supply rail to keep the bias transistor saturated, perform these same measurements. 
+% You might want to increase slightly the range over which you sweep V1 ? V2 for these measurements. 
+% Make plot similar to the ones that you made for the lower bias current. How does the behavior of the circuit 
+% change as the bias current changes from weak or moderate inversion to strong inversion?
+
 Ut = 0.025;
 epsilon = 5e-4;
 Isata = -Ic1a;
-% [Isa, VTa, kappaa]=ekvfit(Vg1a, Isata, epsilon);
+[Isa, VTa, kappaa]=ekvfit(Vg1a, Isata, epsilon);
 % [Isb, VTb, kappab]=ekvfit(Vg1b, -Ic1b, epsilon);
 % [Isc, VTc, kappac]=ekvfit(Vg1c, -Ic1c, epsilon);
 % [Isd, VTd, kappad]=ekvfit(Vg1c, -Ic1d, epsilon);
@@ -47,12 +62,11 @@ xlabel('Mean Channel Current (A)')
 ylabel('Percent Difference from Mean')
 legend('Q1','Q2','Q3','Q4')
 %% Experiment 2
-load('exp2seriesData.mat')
 figure
 semilogy(Vg210mV,Ic210mV,'.')
 hold on
 semilogy(Vg210mVp,Ic210mVp,'.')
-semilogy(Vgs,Ics,'.') % we don't have the data for this one
+semilogy(Vg210mVs,Ic2dd,'.') % we don't have the data for this one
 semilogy(Vg25V,Ic25V,'.')
 semilogy(Vg25Vp,Ic25Vp,'.')
 semilogy(Vg25Vs,Ic25Vs,'.')
@@ -76,10 +90,10 @@ ylabel('Parallel to Single Ratio')
 legend('Vd = 10mV','Vd = 5V')
 %%
 
-ratio_sc10mV = Ic210mV ./ Ics;
+% ratio_sc10mV = Ic210mV ./ Ic210mVs;
 ratio_sc5V = Ic25V ./ Ic25Vs;
-clf
-plot(Vgs,ratio_sc10mV,'.')
+
+% plot(Vg210mV,ratio_sc10mV)
 hold on
 plot(Vg25V,ratio_sc5V,'.')
 hold off
