@@ -1,4 +1,4 @@
-load('lab7data.mat')
+load('lab7datawithI1ab2.mat')
 %% Experiment 1
 % In your report, include a single plot showing I1, I2, I1 ? I2, and I1 + I2, as a function of V1 ? V2 
 % for all three values of V2 that you used. Do these current–voltage characteristics change significantly 
@@ -25,17 +25,17 @@ Isum4 = I1bb4 + I2bb4;
 
 plot(Vdm,I1bb2,'b.')
 hold on
-plot(Vdm,I2bb2,'b:','MarkerSize',20)
-plot(Vdm,Idiff2,'b.-')
-plot(Vdm,Isum2,'bx')
+plot(Vdm,I2bb2,'b.-')
+plot(Vdm,Idiff2,'b')
+plot(Vdm,Isum2,'b:')
 plot(Vdm,I1bb3,'r.')
-plot(Vdm,I2bb3,'r:')
-plot(Vdm,Idiff3,'r.-')
-plot(Vdm,Isum3,'rx')
+plot(Vdm,I2bb3,'r.-')
+plot(Vdm,Idiff3,'r')
+plot(Vdm,Isum3,'r:')
 plot(Vdm,I1bb4,'k.')
-plot(Vdm,I2bb4,'k:')
-plot(Vdm,Idiff4,'k.-')
-plot(Vdm,Isum4,'kx')
+plot(Vdm,I2bb4,'k.-')
+plot(Vdm,Idiff4,'k')
+plot(Vdm,Isum4,'ko','MarkerSize',5)
 xlabel('V1-V2 (V)')
 ylabel('Current (A)')
 legend('I1,V2=2V','I2,V2=2V','I1-I2,V2=2V','I1+I2,V2=2V','I1,V2=3V','I2,V2=3V','I1-I2,V2=3V','I1+I2,V2=3V','I1,V2=4V','I2,V2=4V','I1-I2,V2=4V','I1+I2,V2=4V','Location','eastoutside')
@@ -62,11 +62,12 @@ plot(Vdm,Idiff2,'b.')
 hold on
 plot(Vdm,Idiff3,'r.')
 plot(Vdm,Idiff4,'k.')
-plot(Vdm,y2,'b')
-plot(Vdm,y3,'r')
-plot(Vdm,y4,'k')
+plot(Vdm(20:80),y2(20:80),'b')
+plot(Vdm(20:80),y3(20:80),'r')
+plot(Vdm(20:80),y4(20:80),'k')
 xlabel('V1-V2 (V)')
 ylabel('I1-I2 (A)')
+ylim([-1e-6,1e-6])
 legend('V2=2V','V2=3V','V2=4V','V2=2V fit','V2=3V fit','V2=4V fit','Location','Northwest')
 
 ylim([-(10^(-6)) 10^(-6)])
@@ -74,13 +75,18 @@ ylim([-(10^(-6)) 10^(-6)])
 
 
 %%
-% Idiff4 = 
-% Isum4 = 
+for i = 1:length(I2ab2)
+    I1(i) = I1ab2(length(I2ab2) + 1 - i);
+end
 figure
-% plot(Vdm2,I,'b.')
+Idiffab = I1 - I2ab2;
+Isumab = I1 + I2ab2;
+figure
+plot(Vdm2,I1,'b.')
 hold on
 plot(Vdm2,I2ab2,'r.')
-
+plot(Vdm2,Idiffab,'k.')
+plot(Vdm2,Isumab,'m.')
 xlabel('V1-V2 (V)')
 ylabel('Current (A)')
 legend('I1','I2','I1-I2','I1+I2','Location','northwest')
