@@ -6,7 +6,7 @@ load('lab7data.mat')
 % for all three values of V2. How does the value of V change as V1 goes from below V2 to above it?
 
 % For each of the three values of V2 that you used, fit a straight line to the plot of I1 ?I2 as a 
-% function of V1 ? V2 around the region where V1 ? V2 (i.e., where V1 ? V2 ? 0). The slope of this line is 
+% function of V1 - V2 around the region where V1 ? V2 (i.e., where V1 ? V2 ? 0). The slope of this line is 
 % approximately equal to the (incremental) differential-mode transconductance gain of the differential pair
 % Find eq for Gm in packet
 
@@ -69,6 +69,9 @@ xlabel('V1-V2 (V)')
 ylabel('I1-I2 (A)')
 legend('V2=2V','V2=3V','V2=4V','V2=2V fit','V2=3V fit','V2=4V fit','Location','Northwest')
 
+ylim([-(10^(-6)) 10^(-6)])
+
+
 
 %%
 % Idiff4 = 
@@ -86,4 +89,5 @@ figure
 plot(Vdm2,Vab2,'b.')
 xlabel('V1-V2 (V)')
 ylabel('Voltage @ Node V (V)')
+
 
