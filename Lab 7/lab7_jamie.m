@@ -35,11 +35,11 @@ plot(Vdm,Isum3,'r:')
 plot(Vdm,I1bb4,'k.')
 plot(Vdm,I2bb4,'k.-')
 plot(Vdm,Idiff4,'k')
-plot(Vdm,Isum4,'ko','MarkerSize',5)
+plot(Vdm,Isum4,'k:','MarkerSize',5)
 xlabel('V1-V2 (V)')
 ylabel('Current (A)')
 legend('I1,V2=2V','I2,V2=2V','I1-I2,V2=2V','I1+I2,V2=2V','I1,V2=3V','I2,V2=3V','I1-I2,V2=3V','I1+I2,V2=3V','I1,V2=4V','I2,V2=4V','I1-I2,V2=4V','I1+I2,V2=4V','Location','eastoutside')
-
+%%
 figure
 plot(Vdm,Vbb2,'b.')
 hold on
@@ -75,18 +75,16 @@ ylim([-(10^(-6)) 10^(-6)])
 
 
 %%
-for i = 1:length(I2ab2)
-    I1(i) = I1ab2(length(I2ab2) + 1 - i);
-end
+load('Lab7NewABData.mat')
 figure
-Idiffab = I1 - I2ab2;
-Isumab = I1 + I2ab2;
+Idiffab = I1ab2 - I2ab2;
+Isumab = I1ab2 + I2ab2;
 figure
-plot(Vdm2,I1,'b.')
+plot(Vdm,I1ab2,'b.')
 hold on
-plot(Vdm2,I2ab2,'r.')
-plot(Vdm2,Idiffab,'k.')
-plot(Vdm2,Isumab,'m.')
+plot(Vdm,I2ab2,'r.')
+plot(Vdm,Idiffab,'k.')
+plot(Vdm,Isumab,'m.')
 xlabel('V1-V2 (V)')
 ylabel('Current (A)')
 legend('I1','I2','I1-I2','I1+I2','Location','northwest')

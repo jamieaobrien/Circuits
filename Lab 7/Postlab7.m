@@ -10,17 +10,17 @@ Isum4 = I1bb4 + I2bb4;
 
 plot(Vdm,I1bb2,'b.')
 hold on
-plot(Vdm,I2bb2,'b:','MarkerSize',20)
-plot(Vdm,Idiff2,'b.-')
-plot(Vdm,Isum2,'bx')
+plot(Vdm,I2bb2,'b.-')
+plot(Vdm,Idiff2,'b')
+plot(Vdm,Isum2,'b:')
 plot(Vdm,I1bb3,'r.')
-plot(Vdm,I2bb3,'r:')
-plot(Vdm,Idiff3,'r.-')
-plot(Vdm,Isum3,'rx')
+plot(Vdm,I2bb3,'r.-')
+plot(Vdm,Idiff3,'r')
+plot(Vdm,Isum3,'r:')
 plot(Vdm,I1bb4,'k.')
-plot(Vdm,I2bb4,'k:')
-plot(Vdm,Idiff4,'k.-')
-plot(Vdm,Isum4,'kx')
+plot(Vdm,I2bb4,'k.-')
+plot(Vdm,Idiff4,'k')
+plot(Vdm,Isum4,'k:')
 xlabel('V1-V2 (V)')
 ylabel('Current (A)')
 legend('I1,V2=2V','I2,V2=2V','I1-I2,V2=2V','I1+I2,V2=2V','I1,V2=3V','I2,V2=3V','I1-I2,V2=3V','I1+I2,V2=3V','I1,V2=4V','I2,V2=4V','I1-I2,V2=4V','I1+I2,V2=4V','Location','eastoutside')
@@ -34,6 +34,22 @@ xlabel('V1-V2 (V)')
 ylabel('Voltage @ Node V (V)')
 legend('V2=2V','V2=3V','V2=4V','Location','Northwest')
 
+Vdm2 = linspace(-1,1,301);
+Idiffab = I1ab - I2ab;
+Isumab = I1ab + I2ab;
+figure
+plot(Vdm2,I1ab,'b.')
+hold on
+plot(Vdm2,I2ab,'r.')
+plot(Vdm2,Idiffab,'k.')
+plot(Vdm2,Isumab,'c.')
+xlabel('V1-V2 (V)')
+ylabel('Current (A)')
+legend('I1','I2','I1-I2','I1+I2')
+figure 
+plot(Vdm2, Vab, '.')
+xlabel('V1-V2 (V)')
+ylabel('Voltage @ Node V (V)')
 
 %%
 Vx = vx(1:51);
