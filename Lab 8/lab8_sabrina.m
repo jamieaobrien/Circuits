@@ -60,15 +60,21 @@ ylim([-1,6])
 %%
 % Next, set the differential-mode input voltage to zero and measure the current flowing into the output 
 % of the amplifier as you sweep Vout from one rail to the other. Fit a straight line to the shallow part 
-% of this output current–voltage characteristic, which should correspond to the range of output voltages over which the gain of the circuit is large, and determine the incremental output resistance of the circuit from the slope of the best-fit line. In your report, include a plot showing the output current-voltage characteristic along with the best-fit line. Finally, fix the output voltage somewhere in the middle of the range of output voltages for which the circuit’s gain is large and measure the current flowing out of the amplifier as you sweep V1 around V2. Fit a straight line to the curve around where V1 = V2 and extract a value of the incremental transconductance gain of the circuit with the output voltage fixed 3 from the slope of the best-fit line. In your report, include a plot showing Iout versus Vdm along with the best-fit line.
+% of this output current–voltage characteristic, which should correspond to the range of output voltages 
+% over which the gain of the circuit is large, and determine the incremental output resistance of the 
+% circuit from the slope of the best-fit line. In your report, include a plot showing the output 
+% current-voltage characteristic along with the best-fit line. 
+
+% Vout_sweep vs. Iout_sweep
 
 
-p3 = polyfit(Vout_exp2(32:34),Iout_fixed(32:34),1);
+p3 = polyfit(Vout_sweep(45:95),-Iout_sweep(45:95),1);
 y3 = polyval(p3,Vout_exp2);
 
 
 figure
-plot(Vout_exp2,Iout_fixed,'.-')
+% Either plot like this or zoom in?
+plot(Vout_sweep(36:101),-Iout_sweep(36:101),'.-')
 hold on 
 plot(Vout_exp2,y3,'r')
 
@@ -76,16 +82,29 @@ hold off
 xlabel('Output Voltage (V)')
 ylabel('Output Current (A)')
 legend('Data','Linear fits')
-ylim([-1e-4,1e-4])
+% ylim([-1e-4,1e-4])
 
 
-p4 = polyfit(Vdm(30:37),Iout_fixed(30:37),1);
+%%
+% Finally, fix the output voltage somewhere in the middle of the range of output voltages for which
+% the circuit’s gain is large and measure the current flowing out of the amplifier as you sweep V1 
+% around V2. Fit a straight line to the curve around where V1 = V2 and extract a value of the incremental 
+% transconductance gain of the circuit with the output voltage fixed 3 from the slope of the best-fit line. 
+% In your report, include a plot showing Iout versus Vdm along with the best-fit line.
+
+% Vout = 3
+% V1_2_5 - 3 vs. Iout_fixed
+
+Vdm_2 = V1_2_5 - 3
+
+% its kind weird, fit is not centered at zero? also dont know to to make the line look best....
+p4 = polyfit(Vdm(28:38),Iout_fixed(28:38),1);
 y4 = polyval(p4,Vdm);
 
 figure
-plot(Vdm,Iout_fixed,'.-')
+plot(Vdm_2,Iout_fixed,'.-')
 hold on
-plot(Vdm,y4,'r')
+plot(Vdm_2,y4,'r')
 hold off
 xlabel('V1-V2 (V)')
 ylabel('Output Current (A)')
@@ -94,28 +113,35 @@ ylim([-4e-5,2e-5])
 
 %% Experiment 3
 
-%Vout_Vin_exp3
-p5 = polyfit(Vout_sweep(30:100),Vout_exp3(30:100),1);
+% Configure your amplifier as a unity-gain follower by connecting the output to the inverting
+% input terminal. Measure Vout as you sweep Vin from one rail to the other. Fit a straight line
+% to the VTC that you obtain. Is the incremental gain close to unity? In your report, include
+% a plot showing Vout versus Vin along with the best-fit line. Repeat the sweep of Vin while
+% measuring Vout ? Vin directly. Include a plot of Vout ? Vin versus Vin in your report
+
+% V1 vs Vout_exp3
+
+p5 = polyfit(V1(30:100),Vout_exp3(30:100),1);
 y5 = polyval(p5,Vout_sweep);
 
 figure
-plot(Vout_sweep,Vout_exp3,'.-')
+plot(V1,Vout_exp3,'.-')
 hold on 
-plot(Vout_sweep,y5,'r')
+plot(V1,y5,'r')
 hold off
 xlabel('Input Voltage (V)')
 ylabel('Output Voltage (V)')
 legend('Data','Linear fit')
 
 
-%Vout_Vin_diff_exp3
-p6 = polyfit(Vout_sweep(30:80),Vout_Vin(30:80),1);
+% V1 vs Vout_Vin
+p6 = polyfit(V1(30:80),Vout_Vin(30:80),1);
 y6 = polyval(p6,Vout_sweep);
 
 figure
-plot(Vout_sweep,Vout_Vin,'.-')
+plot(V1,Vout_Vin,'.-')
 hold on
-plot(Vout_sweep,y6,'r')
+plot(V1,y6,'r')
 hold off
 xlabel('Input Voltage (V)')
 ylabel('Vout - Vin (V)')
