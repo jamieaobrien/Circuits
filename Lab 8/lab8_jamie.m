@@ -21,13 +21,13 @@ ylim([-1,6])
 %%
 p3 = polyfit(Vout_exp2(32:34),Iout_fixed(32:34),1);
 y3 = polyval(p3,Vout_exp2);
-
+v = linspace(Vout_exp2(1),Vout_exp2(end),101);
 
 figure
 plot(Vout_exp2,Iout_fixed,'.-')
 hold on 
 plot(Vout_exp2,y3,'r')
-
+plot(v,Iout_sweep,'*')
 hold off
 xlabel('Output Voltage (V)')
 ylabel('Output Current (A)')
@@ -58,6 +58,7 @@ figure
 plot(Vout_sweep,Vout_exp3,'.-')
 hold on 
 plot(Vout_sweep,y5,'r')
+% plot(V1,Vout_sweep,'*')
 hold off
 xlabel('Input Voltage (V)')
 ylabel('Output Voltage (V)')
@@ -72,6 +73,7 @@ figure
 plot(Vout_sweep,Vout_Vin,'.-')
 hold on
 plot(Vout_sweep,y6,'r')
+% plot(V1,Vout_Vin,'*')
 hold off
 xlabel('Input Voltage (V)')
 ylabel('Vout - Vin (V)')
