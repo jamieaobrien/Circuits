@@ -57,6 +57,7 @@ ylabel('Output Voltage (V)')
 legend('Data','Linear fit')
 ylim([-1,6])
 
+Adm = p2(1)
 %%
 % Next, set the differential-mode input voltage to zero and measure the current flowing into the output 
 % of the amplifier as you sweep Vout from one rail to the other. Fit a straight line to the shallow part 
@@ -68,7 +69,7 @@ ylim([-1,6])
 % Vout_sweep vs. Iout_sweep
 
 
-p3 = polyfit(Vout_sweep(45:95),-Iout_sweep(45:95),1);
+p3 = polyfit(Vout_sweep(40:98),-Iout_sweep(40:98),1);
 y3 = polyval(p3,Vout_exp2);
 
 
@@ -85,6 +86,8 @@ legend('Data','Linear fits')
 % ylim([-1e-4,1e-4])
 
 
+Rout = -1/p3(1)
+
 %%
 % Finally, fix the output voltage somewhere in the middle of the range of output voltages for which
 % the circuit’s gain is large and measure the current flowing out of the amplifier as you sweep V1 
@@ -98,18 +101,20 @@ legend('Data','Linear fits')
 Vdm_2 = V1_2_5 - 3
 
 % its kind weird, fit is not centered at zero? also dont know to to make the line look best....
-p4 = polyfit(Vdm(28:38),Iout_fixed(28:38),1);
+p4 = polyfit(Vdm(20:38),-Iout_fixed(20:38),1);
 y4 = polyval(p4,Vdm);
 
 figure
-plot(Vdm_2,Iout_fixed,'.-')
+plot(Vdm_2,-Iout_fixed,'.-')
 hold on
 plot(Vdm_2,y4,'r')
 hold off
 xlabel('V1-V2 (V)')
 ylabel('Output Current (A)')
 legend('Data','Linear fit')
-ylim([-4e-5,2e-5])
+% ylim([-4e-5,2e-5])
+
+Gm = p4(1)
 
 %% Experiment 3
 
@@ -133,6 +138,7 @@ xlabel('Input Voltage (V)')
 ylabel('Output Voltage (V)')
 legend('Data','Linear fit')
 
+Gincr = p5(1)
 
 % V1 vs Vout_Vin
 p6 = polyfit(V1(30:80),Vout_Vin(30:80),1);
@@ -140,9 +146,9 @@ y6 = polyval(p6,Vout_sweep);
 
 figure
 plot(V1,Vout_Vin,'.-')
-hold on
-plot(V1,y6,'r')
-hold off
+% hold on
+% plot(V1,y6,'r')
+% hold off
 xlabel('Input Voltage (V)')
 ylabel('Vout - Vin (V)')
 legend('Data','Linear fit')
