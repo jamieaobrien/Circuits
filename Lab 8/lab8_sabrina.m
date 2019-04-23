@@ -69,13 +69,13 @@ Adm = p2(1)
 % Vout_sweep vs. Iout_sweep
 
 
-p3 = polyfit(Vout_sweep(40:98),-Iout_sweep(40:98),1);
+p3 = polyfit(Vout_sweep(40:98),Iout_sweep(40:98),1);
 y3 = polyval(p3,Vout_exp2);
 
 
 figure
 % Either plot like this or zoom in?
-plot(Vout_sweep(36:101),-Iout_sweep(36:101),'.-')
+plot(Vout_sweep(37:101),Iout_sweep(37:101),'.-')
 hold on 
 plot(Vout_exp2,y3,'r')
 
@@ -101,7 +101,7 @@ Rout = -1/p3(1)
 Vdm_2 = V1_2_5 - 3
 
 % its kind weird, fit is not centered at zero? also dont know to to make the line look best....
-p4 = polyfit(Vdm(20:38),-Iout_fixed(20:38),1);
+p4 = polyfit(Vdm(28:38),-Iout_fixed(28:38),1);
 y4 = polyval(p4,Vdm);
 
 figure
@@ -112,7 +112,7 @@ hold off
 xlabel('V1-V2 (V)')
 ylabel('Output Current (A)')
 legend('Data','Linear fit')
-% ylim([-4e-5,2e-5])
+ylim([-2e-5,5e-5])
 
 Gm = p4(1)
 
