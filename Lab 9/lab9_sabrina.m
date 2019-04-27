@@ -36,10 +36,11 @@ legend('V2 = 2V', 'V2 = 3V', 'V2 = 4V')
 % report, include a plot showing Vout versus Vdm along with the best-fit line.
 
 
+% Set Vb = .8 so that Ib is about 10 micro Amps
 % Vdm_fine_incr vs. Vout_exp2
 % Vdm_fine_incr -.150:.0025:.150
 
-p2 = polyfit(Vdm_fine_incr(32:34),Vout_exp2(32:34),1);
+p2 = polyfit(Vdm_fine_incr(65:70),Vout_exp2(65:70),1);
 y2 = polyval(p2,Vdm_fine_incr);
 
 figure
@@ -67,13 +68,13 @@ Adm = p2(1)
 % Vout_rail vs. Iout_sweep
 
 
-p3 = polyfit(Vout_rail(40:98),Iout_sweep(40:98),1);
+p3 = polyfit(Vout_rail(20:95),Iout_sweep(20:95),1);
 y3 = polyval(p3,Vout_rail);
 
 
 figure
 % Either plot like this or zoom in?
-plot(Vout_rail(37:101),Iout_sweep(37:101),'.-')
+plot(Vout_rail,Iout_sweep,'.-')
 hold on 
 plot(Vout_rail,y3,'r')
 
@@ -81,10 +82,10 @@ hold off
 xlabel('Output Voltage (V)')
 ylabel('Output Current (A)')
 legend('Data','Linear fits')
-% ylim([-1e-4,1e-4])
+ylim([-2e-6,3e-6])
 
 
-Rout = -1/p3(1)
+Rout = 1/p3(1)
 
 %%
 % Finally, fix the output voltage somewhere in the range of output voltages for which the
@@ -106,23 +107,24 @@ Rout = -1/p3(1)
 % Vdm_large_range vs. Iout_fixed
 % Vdm_large_range -1.5:.025:1.50
 
+% Limits of Iout are -9e-6 Amps to 8e-6 Amps
 
-% its kind weird, fit is not centered at zero? also dont know to to make the line look best....
-% p4 = polyfit(Vdm(28:38),-Iout_fixed(28:38),1);
-% y4 = polyval(p4,Vdm);
+
+p4 = polyfit(Vdm_large_range(57:64),-Iout_fixed(57:64),1);
+y4 = polyval(p4,Vdm_large_range);
 
 figure
-plot(Vdm_large_range,Iout_fixed,'.-')
-% hold on
-% plot(Vdm_2,y4,'r')
-% hold off
+plot(Vdm_large_range,-Iout_fixed,'.-')
+hold on
+plot(Vdm_large_range,y4,'r')
+hold off
 xlabel('V1-V2 (V)')
 ylabel('Output Current (A)')
 legend('Data','Linear fit')
-% ylim([-2e-5,5e-5])
-xlim([-.1,.1])
+ylim([-1.1e-5,1.2e-5])
+% xlim([-.1,.1])
 
-% Gm = p4(1)
+Gm = p4(1)
 
 %% Experiment 3
 
