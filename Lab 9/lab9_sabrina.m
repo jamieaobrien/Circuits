@@ -51,7 +51,7 @@ plot(Vdm_fine_incr,y2,'r')
 hold off
 xlabel('V1-V2 (V)')
 ylabel('Output Voltage (V)')
-legend('Data','Linear fit')
+legend('Data','Linear fit, A_d_m = 234.2')
 ylim([-1,6])
 
 Adm = p2(1)
@@ -81,7 +81,7 @@ plot(Vout_rail,y3,'r')
 hold off
 xlabel('Output Voltage (V)')
 ylabel('Output Current (A)')
-legend('Data','Linear fits')
+legend('Data','Linear fit, R_{out} = 4.06e+06')
 ylim([-2e-6,3e-6])
 
 
@@ -120,11 +120,13 @@ plot(Vdm_large_range,y4,'r')
 hold off
 xlabel('V1-V2 (V)')
 ylabel('Output Current (A)')
-legend('Data','Linear fit')
+legend('Data','Linear fit, G_m = 5.963e-05')
 ylim([-1.1e-5,1.2e-5])
 % xlim([-.1,.1])
 
 Gm = p4(1)
+
+Adm_calc = Rout*Gm
 
 %% Experiment 3
 
