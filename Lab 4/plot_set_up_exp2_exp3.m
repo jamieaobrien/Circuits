@@ -63,32 +63,40 @@ legend('I_x = 12mA','I_x = 1.2mA','I_x = 120\muA', 'I_x = 12mA fit', 'I_x = 1.2m
 
 %%
 clf
-% loglog(Ix250Si ,Iz250Si ,'Marker','.','MarkerSize',12) % Iy1, Iz1, Marker stuff - I found this looks pretty good
-% hold on
-% loglog(Ix25kSi ,Iz25kSi ,'Marker','.','MarkerSize',12) % Iy2, Iz2, Marker stuff - I found this looks pretty good
-% loglog(Ix2kSi , Iz2kSi,'Marker','.','MarkerSize',12) % Iy3, Iz3, Marker stuff - I found this looks pretty good
-
-loglog(Ix250,-Iz250, 'b','Marker','.','MarkerSize',12) % Ix1, Iz1, Marker stuff - I found this looks pretty good
+loglog(Ix250 , -Iz250 ,'b.','MarkerSize',12) % Iy1, Iz1, Marker stuff - I found this looks pretty good
 hold on
-loglog(Ix250,-Iz2k,'r','Marker','.','MarkerSize',12) % Ix2, Iz2, Marker stuff - I found this looks pretty good
-loglog(Ix250,-Iz25k, 'g','Marker','.','MarkerSize',12) % Ix3, Iz3, Marker stuff - I found this looks pretty good
+loglog(Ix25k ,-Iz25k ,'r.','MarkerSize',12) % Iy2, Iz2, Marker stuff - I found this looks pretty good
+loglog(Ix2k , -Iz2k,'g.','MarkerSize',12) % Iy3, Iz3, Marker stuff - I found this looks pretty good
+
+% g1 = (log(Ix250).^2)./0.001;
+% g2 = (log(Ix2k).^2)./1e-4;
+% 
+% 
+% loglog(Ix250,g1,'b*')
+% loglog(Ix250,exp(g2),'r')
+
+
 xlabel('Ix (A)')
 ylabel('Iz (A)')
 % 
 % Iz1theo3 = (Ix250.^2)/(10^-3);
-% Iz2theo3 = (Ix250.^2)/(10^-4);
-% Iz3theo3 = (Ix250.^2)/(10^-5);
+% Iz2theo3 = (Ix2k.^2)/(10^-4);
+% Iz3theo3 = (Ix25k.^2)/(10^-5);
+% 
+% loglog(Ix250,(Iz1theo3),'b')
+% loglog(Ix2k,(Iz2theo3),'r')
 
 p4 = polyfit(log(Ix250) ,log(-Iz250),2);
-y4 = polyval(p1,log(Ix250));
-p5 = polyfit(log(Ix25k) ,log(-Iz25k),3);
-y5 = polyval(p2, log(Ix25k));
-p6 = polyfit(log(Ix2k) , log(-Iz2k),4);
-y6 = polyval(p3, log(Ix2k));
+y4 = polyval(p4,log(Ix250));
+p5 = polyfit(log(Ix25k) ,log(-Iz25k),2);
+y5 = polyval(p5, log(Ix25k));
+p6 = polyfit(log(Ix2k) , log(-Iz2k),2);
+y6 = polyval(p6, log(Ix2k));
 
-loglog(Ix1,exp(y4),'b')
-loglog(Ix1,exp(y5),'r')
-loglog(Ix1,exp(y6),'g')
+loglog(Ix250,exp(y4),'b')
+hold on
+loglog(Ix2k,exp(y5),'r')
+loglog(Ix25k,exp(y6),'g')
 
 legend('I_y = 1mA','I_y = 100\muA','I_y = 10\muA', 'I_y = 1mA fit', 'I_y = 100\muA fit', 'I_y = 10\muA fit') % name them, probably something to do with each value of Iy
 
@@ -96,10 +104,10 @@ legend('I_y = 1mA','I_y = 100\muA','I_y = 10\muA', 'I_y = 1mA fit', 'I_y = 100\m
 %%
 clf
 
-loglog(Ix250Si,-Iz250Si, 'b','Marker','.','MarkerSize',12) % Ix1, Iz1, Marker stuff - I found this looks pretty good
+loglog(Iy1source,-Iz250Si, 'b','Marker','.','MarkerSize',12) % Ix1, Iz1, Marker stuff - I found this looks pretty good
 hold on
-loglog(Ix250Si,-Iz2kSi,'r','Marker','.','MarkerSize',12) % Ix2, Iz2, Marker stuff - I found this looks pretty good
-loglog(Ix250Si,-Iz25kSi, 'g','Marker','.','MarkerSize',12) % Ix3, Iz3, Marker stuff - I found this looks pretty good
+loglog(Iy2source,-Iz2kSi,'r','Marker','.','MarkerSize',12) % Ix2, Iz2, Marker stuff - I found this looks pretty good
+loglog(Iy3source,-Iz25kSi, 'g','Marker','.','MarkerSize',12) % Ix3, Iz3, Marker stuff - I found this looks pretty good
 
 xlabel('Log of Iy (A)')
 ylabel('Log of Iz (A)')
@@ -108,6 +116,10 @@ ylabel('Log of Iz (A)')
 % Iz2theo4 = (Ix250Si.^2)/(3/2500);
 % Iz3theo4 = (Ix250Si.^2)/(3/25000);
 
+% Iz1theo4 = (.00012^2)./Iy1source;
+% loglog(Iy1source,exp(Iz1theo4),'c*')
+
+
 p7 = polyfit(log(Ix250Si(3:33)),log(-Iz250Si(3:33)),1);
 y7 = polyval(p7,log(Ix250Si));
 p8 = polyfit(log(Ix2kSi(15:32)),log(-Iz2kSi(15:32)),1);
@@ -115,9 +127,9 @@ y8 = polyval(p8,log(Ix2kSi));
 p9 = polyfit(log(Ix25kSi(25:30)),log(-Iz25kSi(25:30)),1);
 y9 = polyval(p9,log(Ix25kSi));
 
-loglog(Ix1,exp(y7),'b')
-loglog(Ix1,exp(y8),'r')
-loglog(Ix1,exp(y9),'g')
+loglog(Ix250Si,exp(y7),'b')
+loglog(Ix2kSi,exp(y8),'r')
+loglog(Ix25kSi,exp(y9),'g')
 ylim([10e-11,10e-1])
 legend('I_x = 12mA','I_x = 1.2mA','I_x = 120\muA', 'I_x = 12mA fit', 'I_x = 1.2mA fit', 'I_x = 120\muA fit') % name them, probably something to do with each value of Iy
 

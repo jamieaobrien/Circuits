@@ -59,16 +59,20 @@ legend('nMOS','nMOS strong inversion fit','nMOS weak inversion fit','pMOS','pMOS
 %nmos
 pn1 = polyfit(Vsn(80:131),log(-Icn(80:131)),1);
 yn1 = polyval(pn1,Vsn)
+pp1 = polyfit(Vsp(150:180),log(-Icp(150:180)),1);
+yp1 = polyval(pp1,Vsp);
 % did I fit the line to the right part of the curve?
 clf
-semilogy(Vsn,-Icn,'.','MarkerSize',8)
+semilogy(Vsn,-Icn,'b.','MarkerSize',8)
 hold on
-semilogy(Vsn,exp(yn1))
+semilogy(Vsn,exp(yn1),'b')
+semilogy(Vsp,-Icp,'r.','MarkerSize',8)
+semilogy(Vsp,exp(yp1),'r')
 ylim([10^(-10) 10^(-2)])
 xlabel('Source Voltage (V)')
 ylabel('Channel Current (A)')
 
-legend('Experimental','Weak inversion fit')
+legend('nMOS','nMOS fit','pMOS','pMOS fit')
 
 %%
 %pmos

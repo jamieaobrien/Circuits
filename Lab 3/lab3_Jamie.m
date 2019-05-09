@@ -2,8 +2,8 @@ load('Lab3Data_Exp1and2.mat')
 %%
 Ic1 = -Ie1 - Ib1;
 
-%p = polyfit(Vb1(50:75),log(Ib1(50:75)),1);
-%y = polyval(p,Vb1);
+p = polyfit(Vb1(50:75),log(Ib1(50:75)),1);
+y = polyval(p,Vb1);
 
 g = p(1).*Vb1 + p(2);
 uT_Ib = 1./p(1);
@@ -30,15 +30,17 @@ rbt = B./gm;
 %% Experiment 1 - Plot 1 - working on theoretical
 clf
 yyaxis left
-h = semilogy(Vb1, Ib1);
+h = semilogy(Vb1, Ib1,'.');
 hold on
-semilogy(Vb1,exp(y1))
+semilogy(Vb1,exp(y1),'-')
+ylim([10e-12,10e-4])
 hold off
 ylabel('Base Current (A)')
 yyaxis right
-h2 = semilogy(Vb1, Ic1);
+h2 = semilogy(Vb1, Ic1,'.');
 hold on
-semilogy(Vb1,exp(yg))
+semilogy(Vb1,exp(yg),'-')
+ylim([10e-10,10e0])
 hold off
 %semilogy(Vb1,exp(y),'m*');
 %semilogy(Vb1,Ict,'k')
@@ -46,6 +48,27 @@ hold off
 
 legend('Ib','Ib Fit','Ic', 'Ic Fit')
 ylabel('Collector Current (A)')
+xlabel('Base Voltage (V)')
+
+%% Experiment 1 - Plot 1 - working on theoretical
+clf
+semilogy(Vb1, Ib1,'b.');
+hold on
+semilogy(Vb1,exp(y1),'b-')
+% ylim([10e-12,10e-4])
+% hold off
+ylabel('Base Current (A)')
+semilogy(Vb1, Ic1,'r.');
+% hold onRR
+semilogy(Vb1,exp(yg),'r-')
+% ylim([10e-10,10e0])
+hold off
+%semilogy(Vb1,exp(y),'m*');
+%semilogy(Vb1,Ict,'k')
+%semilogy(Vb1,Ibt,'m')
+
+legend('I_b','I_b fit','I_c', 'I_c fit')
+ylabel('Current (A)')
 xlabel('Base Voltage (V)')
 
 
@@ -65,13 +88,13 @@ rbt = uT_Ib./Ib1;
 %p2 = polyfit(Ib1(1:end-1),rb,1);
 %y2 = polyval(p2,Ib1);
 
-loglog(Ib1(1:end-1),rb,'b:')
+loglog(Ib1(1:end-1),rb,'b.')
 hold on
-loglog(Ib1,rbt,'b--')
+loglog(Ib1,rbt,'b-')
 %loglog(Ib1,exp(y2))
-legend('rb','Theoretical')
+legend('r_b','Theoretical')
 xlabel('Current (A)')
-ylabel('Incremental base resistance,rb')
+ylabel('Incremental base resistance,r_b')
 
 
 %% Experiment 1 - Plot 4 - theoretical???
@@ -87,13 +110,14 @@ gmt = Ic1./uT_Ib;
 % hold on
 % 
 % yyaxis right
-loglog(Ic1(1:end-1),gm,'b:')
+loglog(Ic1(1:end-1),gm,'b.')
 hold on
 %loglog(Ic1,gm1,'k*-')
-loglog(Ic1,gmt,'b--')
-legend('gm','gm fit')
+loglog(Ic1,gmt,'b-')
+ylim([10e-9,10e0])
+legend('g_m','g_m fit')
 xlabel('Collector Current (A)')
-ylabel('Incremental Transconductance Gain, gm')
+ylabel('Incremental Transconductance Gain, g_m')
 
 
 %% Experiment 3 - plot 1

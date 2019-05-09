@@ -8,11 +8,10 @@ plot(Vin2_100,Vout2_100,'Marker','.','MarkerSize',8);
 hold on
 plot(Vin2_1000,Vout2_1000,'Marker','.','MarkerSize',8);
 plot(Vin2_10k,Vout2_10k,'Marker','.','MarkerSize',8);
-plot(Vin2_100,y1, 'k--');
+plot(Vin2_100,y1, 'k-');
 legend('100 Ohm Resistor','1k Ohm Resistor','10k Ohm Resistor','Best fit line (m = 1.001)','Location','northwest')
 xlabel('Input Voltage (V)')
 ylabel('Output Voltage (V)')
-title('Applied Input Voltage Vs. Voltage Across Transistor')
 
 
 
@@ -32,25 +31,27 @@ semilogy(Vin2_100,Iin2_100,'Marker','.','MarkerSize',8);
 hold on
 semilogy(Vin2_1000,Iin2_1000,'Marker','.','MarkerSize',8);
 semilogy(Vin2_10k,Iin2_10k,'Marker','.','MarkerSize',8);
-semilogy(Vin2_100(6:end),exp(y1),'m-')
-legend('100','1000','10000')
+semilogy(Vin2_100,exp(y1),'k-')
+xlim([0.3,1])
+legend('R=100 Ohms','R=1000 Ohms','R=10000 Ohms','m = 38.74 A/V, b = -33.11 A')
 xlabel('Input Voltage (V)')
-ylabel('Input Current (log(A))')
+ylabel('Input Current (A)')
 
 
 
 %% Exp. 2 Vin vs. log(Iin)
 clf
 pR100 = polyfit(Vin2_100(1:30),Iin2_100(1:30),1); %V1 is the x axis, I1 is the y axis, 1 gives us linear coefficients (y=mx+b so p1=[m b])
-yR100 = polyval(pR100,Vin2_100(1:45)); % generates y values using the coefficents from polyfit
+yR100 = polyval(pR100,Vin2_100); % generates y values using the coefficents from polyfit
 rootR100 = roots(pR100);
 
-plot(Vin2_100,Iin2_100);
+plot(Vin2_100,Iin2_100,'.');
 hold on
-plot(Vin2_100(1:45),yR100)
+plot(Vin2_100,yR100)
+xlim([0.5,1])
+ylim([-.5e-3,3.5e-3])
 xlabel('Input Voltage (V)')
 ylabel('Input Current (A)')
-title('100 Ohm Resistor')
 legend('100 Ohm Resistor','Best fit line (x-intercept = .6558V)')
 
 %%
@@ -59,12 +60,13 @@ yR1000 = polyval(pR1000,Vin2_1000(1:45)); % generates y values using the coeffic
 rootR1000 = roots(pR1000);
 
 clf
-plot(Vin2_1000,Iin2_1000);
+plot(Vin2_1000,Iin2_1000,'.');
 hold on
 plot(Vin2_1000(1:45),yR1000)
+xlim([0.5,1])
+ylim([-.5e-4,3.5e-4])
 xlabel('Input Voltage (V)')
 ylabel('Input Current (A)')
-title('1000 Ohm Resistor')
 legend('1000 Ohm Resistor','Best fit line (x-intercept = .6029V)')
 
 
@@ -74,15 +76,16 @@ yR10k = polyval(pR10k,Vin2_10k(1:50)); % generates y values using the coefficent
 rootR10k = roots(pR10k);
 
 clf
-plot(Vin2_10k,Iin2_10k);
+plot(Vin2_10k,Iin2_10k,'.');
 hold on
 plot(Vin2_10k(1:50),yR10k)
+xlim([0.5,1])
+ylim([-1e-5,4.5e-5])
 xlabel('Input Voltage (V)')
 ylabel('Input Current (A)')
-title('10k Ohm Resistor')
 legend('10k Ohm Resistor','Best fit line (x-intercept = .5482V)')
 
-%% Making Ion as func of R
+%% Making Ion as funcof R
 clf
 Ut = 1/p2(1);
 Rs = [100, 1000, 10000];
@@ -94,9 +97,8 @@ Ions = [Iin2_100(35), Iin2_1000(40), Iin2_10k(46)]
 loglog(Rs, Ions, 'bo');
 hold on
 loglog(Rs, Ions_theoretical);
-xlabel('Resistance (log(Ohms))')
-ylabel('Current (log(A))')
-title('Ion as function of R')
+xlabel('Resistance (Ohms)')
+ylabel('Current (A)')
 legend('Measured values for Ion','Theoretical: Ion = Ut/R, Ut = .0258V')
 
 
@@ -109,9 +111,8 @@ Vons_theoretical = Ut.*log(Ions_theoretical./Is);
 semilogx(Rs, Vons, 'bo');
 hold on
 semilogx(Rs, Vons_theoretical);
-xlabel('Resistance (log(Ohms))')
+xlabel('Resistance (Ohms)')
 ylabel('Voltage (V)')
-title('Von as function of R')
 legend('Measured values for Von','Theoretical: Von = Ut*log(Ion/Is), Ut = .0258V, Is = 4.167e-15A')
 
 
