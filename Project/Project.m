@@ -1,3 +1,4 @@
+load('ProjectData.mat')
 %%
 figure
 plot(v1,IxU1DRAIN, 'k')
